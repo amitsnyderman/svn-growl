@@ -13,7 +13,8 @@ URL=`svn info $REPO 2>/dev/null | sed -ne 's#^URL: ##p'`
 THERE=`svn info $URL 2>/dev/null | sed -ne 's#^Last Changed Rev: ##p'`
 HERE=`svn info $REPO 2>/dev/null | sed -ne 's#^Revision: ##p'`
 BLAME=`svn info $URL 2>/dev/null | sed -ne 's#^Last Changed Author: ##p'`
+ID="svn-growl-$REPO-$THERE"
 
 if [ $THERE -gt $HERE ] ; then
-	/usr/local/bin/growlnotify -n "svn-growl" --image "$DIRNAME/icon.png" -d "svn-growl-$REPO" -s -t "SVN Commit by $BLAME" -m "Local: $HERE - Remote: $THERE"
+	/usr/local/bin/growlnotify -n "svn-growl" --image "$DIRNAME/icon.png" -d "$ID" -s -t "SVN Commit by $BLAME" -m "Local: $HERE - Remote: $THERE"
 fi
